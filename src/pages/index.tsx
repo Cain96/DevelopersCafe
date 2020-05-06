@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 type Props = {
+  location: Location;
   data: {
     site: {
       siteMetadata: {
@@ -15,9 +16,9 @@ type Props = {
   };
 };
 
-const IndexPage: FC<Props> = ({ data }) => {
+const IndexPage: FC<Props> = ({ location, data }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <div>
         <h1>Hi people</h1>
         <p>

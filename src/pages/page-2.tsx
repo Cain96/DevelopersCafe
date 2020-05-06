@@ -2,9 +2,13 @@ import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import Layout from '../components/Layout';
 
-const SecondPage: FC = () => {
+type Props = {
+  location: Location;
+};
+
+const SecondPage: FC<Props> = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <div>
         <h1>Hi from the second page</h1>
         <p>Welcome to page 2</p>
