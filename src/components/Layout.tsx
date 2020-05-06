@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 
-// import './layout.css';
+import './layout.css';
 import { css } from '@emotion/core';
 import Header from './Header';
 
