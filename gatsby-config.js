@@ -1,13 +1,20 @@
 const path = require(`path`);
+const config = require('./config/site');
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Typescript Starter`,
+    ...config,
   },
   plugins: [
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: `types/graphql-types.d.ts`,
+      },
+    },
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
@@ -28,5 +35,20 @@ module.exports = {
         name: `AnchorPodCast`,
       },
     },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: config.title,
+        shortName: config.shortName,
+        description: config.description,
+        startUrl: config.pathPrefix,
+        backgroundColor: config.backgroundColor,
+        themeColor: config.themeColor,
+        display: 'standalone',
+        icon: config.favicon,
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 };
