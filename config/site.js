@@ -6,8 +6,8 @@ module.exports = {
   url: 'https://developers-cafe.tech',
   siteUrl: 'https://developers-cafe.tech/',
   siteLanguage: 'ja',
-  logo: 'static/logo/logo.png',
-  banner: 'static/logo/banner.png',
+  logo: 'logo/logo.png',
+  banner: 'logo/banner.png',
 
   favicon: 'static/logo/favicon.png',
   shortName: 'DevCafe',
