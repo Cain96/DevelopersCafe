@@ -1,20 +1,18 @@
 import React, { FC } from 'react';
-import { Helmet } from 'react-helmet';
 
 import './layout.css';
 import { css } from '@emotion/core';
+import SEO from './SEO';
 import Header from './Header';
 
-const Layout: FC = ({ children }) => {
+type Props = {
+  location?: Location;
+};
+
+const Layout: FC<Props> = ({ location, children }) => {
   return (
     <div>
-      <Helmet
-        title="Gatsby Default Starter"
-        meta={[
-          { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' },
-        ]}
-      />
+      {location && <SEO pathname={location.pathname} />}
       <Header />
       <div
         css={css({
