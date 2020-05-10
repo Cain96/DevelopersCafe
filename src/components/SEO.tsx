@@ -35,15 +35,10 @@ const SEO: FC<Props> = ({ title, description, banner, pathname }) => {
 
   const siteUrl = data.site?.siteMetadata?.siteUrl || '';
 
-  let realPrefix = '';
-  if (data.site?.siteMetadata?.pathPrefix && data.site.siteMetadata.pathPrefix !== '/') {
-    realPrefix = data.site.siteMetadata.pathPrefix;
-  }
-
   const seo = {
-    image: `${siteUrl}${realPrefix}${banner || data.site?.siteMetadata?.defaultBanner}`,
+    image: `${siteUrl}/${banner || data.site?.siteMetadata?.defaultBanner}`,
     url: `${siteUrl}${pathname || ''}`,
-    logoUrl: `${siteUrl}${realPrefix}${banner || data.site?.siteMetadata?.logo}`,
+    logoUrl: `${siteUrl}/${banner || data.site?.siteMetadata?.logo}`,
     siteLanguage: data.site?.siteMetadata?.siteLanguage || '',
     shortName: data.site?.siteMetadata?.shortName || '',
     title: title || data.site?.siteMetadata?.defaultTitle || '',
