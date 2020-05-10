@@ -37,6 +37,8 @@ const SEO: FC<Props> = ({ title, description, banner, pathname }) => {
 
   const seo = {
     image: `${siteUrl}/${banner || data.site?.siteMetadata?.defaultBanner}`,
+    imageWidth: '1200',
+    imageHeight: '630',
     url: `${siteUrl}${pathname || ''}`,
     logoUrl: `${siteUrl}/${banner || data.site?.siteMetadata?.logo}`,
     siteLanguage: data.site?.siteMetadata?.siteLanguage || '',
@@ -100,6 +102,8 @@ const SEO: FC<Props> = ({ title, description, banner, pathname }) => {
         <meta name="twitter:title" content={seo.title} />
         <meta name="twitter:description" content={seo.description} />
         <meta name="twitter:image" content={seo.image} />
+        <meta name="twitter:image:width" content={seo.imageWidth} />
+        <meta name="twitter:image:height" content={seo.imageHeight} />
       </Helmet>
     </>
   );
