@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import './layout.css';
+import '../styles/layout.css';
 import { css } from '@emotion/core';
 import SEO from './SEO';
 
