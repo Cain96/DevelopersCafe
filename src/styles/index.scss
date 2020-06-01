@@ -1,7 +1,39 @@
-.hoge {
-  color: red;
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 100px;
 
-  &:hover {
-    color: violet;
+  &__profile {
+    flex-basis: 33.3%;
+    margin-right: 36px;
+
+    // TODO: 確認用、後で消す
+    background-color: azure;
+  }
+
+  &__image::before {
+    margin-top: 100%;
+    display: block;
+    background-color: navajowhite;
+    content: '';
+  }
+
+  &__image {
+    width: 100%;
+    background-color: navajowhite;
+    display: block;
+  }
+
+  &__info {
+    display: block;
+    text-align: center;
+  }
+
+  &__episodes {
+    flex-basis: 66.6%;
+
+    // TODO: 確認用、後で消す
+    background-color: azure;
   }
 }
