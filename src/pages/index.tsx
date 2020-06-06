@@ -53,7 +53,11 @@ const IndexPage: FC<Props> = ({ location, data }) => {
           </div>
 
           <Link to="/about/">
-            <h2  className="top__aboutLink">About Us<i className="fas fa-arrow-right"></i></h2>
+            <h2 className="top__aboutLink">
+              About Us
+              {/* TODO: font-awesome のパッケージをインストールする */}
+              <i className="fas fa-arrow-right" />
+            </h2>
           </Link>
         </div>
 
@@ -63,7 +67,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             for (let i = 11; i > 0; i--) {
               episodes.push(
                 <div className="top__episode">
-                  <Link to={'/episode/' + i}>
+                  {/* TODO: <Link to={'/episode/' + i}> に直す */}
+                  <Link to="/episode/">
                     <div className="top__episodeData">2020/XX/XX</div>
 
                     <h2 className="top__episodeTitle">#{i}: 新社会人の春</h2>
