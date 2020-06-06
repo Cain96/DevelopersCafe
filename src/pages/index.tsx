@@ -20,15 +20,11 @@ type Props = {
 const IndexPage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
-      {/* <div>
-        <h1 className="hoge">Test</h1>
-        <Link to="/about/">AboutUs</Link>
-      </div> */}
       <div className="top">
         <div className="top__profile">
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="top__image">
-          </div>
+          <div className="top__image"></div>
+
           <div className="top__info">
             <span>
               新卒ソフトウェアエンジニアが送る<br/>
@@ -37,25 +33,45 @@ const IndexPage: FC<Props> = ({ location, data }) => {
               またはdevelopers.cafe.podcast@gmail.com まで
             </span>
           </div>
+
           <div className="top__starring">
-            <h2 className="top__starringTitle"></h2>
-            <div className="top__profileContainer">
-              <div className="top__biographical"></div>
-              <div className="top__bio"></div>
+            <h2 className="top__starringTitle">Starring</h2>
+            <div className="top__bioContainer">
+              <div className="top__bioWrapper">
+                <div className="top__bioImage"></div>
+                <div className="top__bioName">くろけん</div>
+              </div>
+
+              <div className="top__bioWrapper">
+                <div className="top__bioImage"></div>
+                <div className="top__bioName">こうすけ</div>
+              </div>
             </div>
           </div>
+
+          <Link to="/page-2/" className="top__aboutusLink">AboutUs</Link>
         </div>
 
-        <div className="top__episodes">
-          <div className="top__episodeData">
-            2020/XX/XX
-          </div>
-          <h2 className="top__episodeTitle">
-            #11: 新社会人の春 >
-          </h2>
-          <div className="top__episodeExplain">
-          ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
-          </div>
+        <div className="top__episodesContainer">
+          {(() => {
+            const episodes = [];
+            for (let i = 11; i > 0; i--) {
+              episodes.push(<div className="top__episode">
+              <div className="top__episodeData">
+                2020/XX/XX
+              </div>
+
+              <h2 className="top__episodeTitle">
+                #{i}: 新社会人の春
+              </h2>
+
+              <div className="top__episodeExplain">
+              ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
+              </div>
+            </div>)
+            }
+            return <ul>{episodes}</ul>;
+          })()}
         </div>
       </div>
     </Layout>
