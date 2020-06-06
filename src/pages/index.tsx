@@ -64,7 +64,7 @@ const IndexPage: FC<Props> = ({ location, data }) => {
         <div className="top__episodesContainer">
           {(() => {
             const episodes = [];
-            for (let i = 11; i > 0; i-=1) {
+            for (let i = 11; i > 0; i -= 1) {
               episodes.push(
                 <div className="top__episode">
                   {/* TODO: <Link to={'/episode/' + i}> に直す */}
