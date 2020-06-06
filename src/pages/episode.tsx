@@ -51,7 +51,7 @@ const EpisodePage: FC<Props> = ({ location }) => {
           </Link>
         </div>
 
-        <div className="episode__info">
+        <div className="episode__content">
           {/* iframe 挿入 */}
           <iframe
             title="anchor player"
@@ -62,7 +62,7 @@ const EpisodePage: FC<Props> = ({ location }) => {
             scrolling="no"
           />
 
-          <div className="episode__detail">
+          <div className="episode__contentDetail">
             <span>
               今回は新社会人になって二ヶ月になったこうすけに悩んでいることを聞いてみました。
               <br />
@@ -73,9 +73,9 @@ const EpisodePage: FC<Props> = ({ location }) => {
           </div>
 
           <div className="episode__shownotes">
-            <h2 className="episode__title">ShowNotes</h2>
+            <h2 className="episode__shownotesTitle">ShowNotes</h2>
 
-            <ul className="episode__content">
+            <ul className="episode__shownotesContent">
               <li>リモート入社式と新入社員のオンボーディグ</li>
               <li>リモート飲みとは？</li>
               <li>運動不足どう解消してる？</li>
