@@ -52,8 +52,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             </div>
           </div>
 
-          <Link to="/aboutus/" className="top__aboutusLink">
-            AboutUs
+          <Link to="/about/">
+            <h2  className="top__aboutLink">About Us<i className="fas fa-arrow-right"></i></h2>
           </Link>
         </div>
 
