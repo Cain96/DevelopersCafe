@@ -52,7 +52,7 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             </div>
           </div>
 
-          <Link to="/page-2/" className="top__aboutusLink">
+          <Link to="/aboutus/" className="top__aboutusLink">
             AboutUs
           </Link>
         </div>
@@ -63,13 +63,18 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             for (let i = 11; i > 0; i--) {
               episodes.push(
                 <div className="top__episode">
-                  <div className="top__episodeData">2020/XX/XX</div>
+                  <Link to={'/episode/' + i}>
+                    <div className="top__episodeData">2020/XX/XX</div>
 
-                  <h2 className="top__episodeTitle">#{i}: 新社会人の春</h2>
+                    <h2 className="top__episodeTitle">#{i}: 新社会人の春</h2>
 
-                  <div className="top__episodeExplain">
-                    ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
-                  </div>
+                    <div className="top__episodeExplain">
+                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
+                      {/*
+                       */}
+                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
+                    </div>
+                  </Link>
                 </div>,
               );
             }
