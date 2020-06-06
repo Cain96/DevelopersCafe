@@ -54,6 +54,7 @@ const EpisodePage: FC<Props> = ({ location }) => {
         <div className="episode__info">
           {/* iframe 挿入 */}
           <iframe
+            title="anchor player"
             src="https://anchor.fm/developers-cafe/embed/episodes/11-ectm8q/a-a1v8s28"
             height="150px"
             width="100%"
