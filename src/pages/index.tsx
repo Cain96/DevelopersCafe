@@ -63,9 +63,10 @@ const IndexPage: FC<Props> = ({ location, data }) => {
 
         <div className="top__episodesContainer">
           {(() => {
-            const episodes = [];
-            for (let i = 11; i > 0; i -= 1) {
-              episodes.push(
+            const index = [...Array(11)].map((_, i) => 11 - i);
+            let episodes: Array<JSX.Element> = [];
+            episodes = index.map((i) => {
+              return (
                 <div className="top__episode">
                   {/* TODO: <Link to={'/episode/' + i}> に直す */}
                   <Link to="/episode/">
@@ -80,9 +81,9 @@ const IndexPage: FC<Props> = ({ location, data }) => {
                       ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
                     </div>
                   </Link>
-                </div>,
+                </div>
               );
-            }
+            });
             return <ul>{episodes}</ul>;
           })()}
         </div>
