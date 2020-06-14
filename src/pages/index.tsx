@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
+import Img, { FixedObject } from "gatsby-image";
 import Layout from '../components/Layout';
 import '../styles/index.scss';
+
+import {jsx}
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -14,6 +17,11 @@ type Props = {
         title: string;
       };
     };
+    fileName: {
+      childImageSharp: {
+        fixed: FixedObject;
+      }
+    }
   };
 };
 
@@ -23,7 +31,9 @@ const IndexPage: FC<Props> = ({ location, data }) => {
       <div className="top">
         <div className="top__profile">
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="top__image" />
+          {/* <div className="top__image" /> */}
+          <Img alt="ロゴ画像" fixed={data.fileName.childImageSharp.fixed} />
+
 
           <div className="top__info">
             <span>
@@ -97,6 +107,13 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    fileName: file(relativePath: { eq: "square-logo.png" }) {
+      childImageSharp {
+        fixed(width: 480, height: 480) {
+          ...GatsbyImageSharpFixed
+        }
       }
     }
   }
