@@ -32,6 +32,7 @@
     "gatsby-plugin-sharp": "^2.6.11",
     "gatsby-plugin-sitemap": "^2.4.2",
     "gatsby-plugin-typescript": "^2.4.2",
+    "gatsby-source-filesystem": "^2.3.11",
     "gatsby-source-rss-feed": "^1.2.0",
     "gatsby-transformer-sharp": "^2.5.5",
     "graphql": "^14.0.0",
