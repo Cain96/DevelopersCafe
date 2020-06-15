@@ -8,8 +8,6 @@ module.exports = {
   siteLanguage: 'ja',
   logo: 'logo/logo.png',
   banner: 'logo/banner.png',
-  squareLogo: 'logo/square-logo.png',
-
   favicon: 'static/logo/favicon.png',
   shortName: 'DevCafe',
   author: 'Developers Cafe',

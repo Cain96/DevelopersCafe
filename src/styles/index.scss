@@ -11,17 +11,8 @@
     margin-right: 36px;
   }
 
-  &__image::before {
-    padding-top: 100%;
-    display: block;
-    background-color: navajowhite; // TODO: 確認用、後で消す
-    content: '';
-  }
-
   &__image {
-    width: 100%;
-    background-color: navajowhite; // TODO: 確認用、後で消す
-    display: block;
+    width: 330px;
   }
 
   &__info {

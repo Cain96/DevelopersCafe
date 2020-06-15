@@ -5,8 +5,6 @@ import Img, { FixedObject } from "gatsby-image";
 import Layout from '../components/Layout';
 import '../styles/index.scss';
 
-import {jsx}
-
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 type Props = {
@@ -17,7 +15,17 @@ type Props = {
         title: string;
       };
     };
-    fileName: {
+    squareLogo: {
+      childImageSharp: {
+        fixed: FixedObject;
+      }
+    },
+    kosukeIcon: {
+      childImageSharp: {
+        fixed: FixedObject;
+      }
+    },
+    kurokenIcon: {
       childImageSharp: {
         fixed: FixedObject;
       }
@@ -30,10 +38,7 @@ const IndexPage: FC<Props> = ({ location, data }) => {
     <Layout location={location}>
       <div className="top">
         <div className="top__profile">
-          {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          {/* <div className="top__image" /> */}
-          <Img alt="ロゴ画像" fixed={data.fileName.childImageSharp.fixed} />
-
+          <Img className="top__image" alt="ロゴ画像" fixed={data.squareLogo.childImageSharp.fixed} />
 
           <div className="top__info">
             <span>
@@ -51,12 +56,12 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             <h2 className="top__starringTitle">Starring</h2>
             <div className="top__bioContainer">
               <div className="top__bioWrapper">
-                <div className="top__bioImage" />
+              <Img className="top__bioImage" alt="アイコン画像" fixed={data.kurokenIcon.childImageSharp.fixed} />
                 <div className="top__bioName">くろけん</div>
               </div>
 
               <div className="top__bioWrapper">
-                <div className="top__bioImage" />
+                <Img className="top__bioImage" alt="アイコン画像" fixed={data.kosukeIcon.childImageSharp.fixed} />
                 <div className="top__bioName">こうすけ</div>
               </div>
             </div>
@@ -109,9 +114,23 @@ export const pageQuery = graphql`
         title
       }
     }
-    fileName: file(relativePath: { eq: "square-logo.png" }) {
+    squareLogo: file(relativePath: { eq: "square-logo.png" }) {
       childImageSharp {
-        fixed(width: 480, height: 480) {
+        fixed(width: 330, height: 330) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
           ...GatsbyImageSharpFixed
         }
       }
