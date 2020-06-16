@@ -2301,7 +2301,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteLanguage'
   | 'siteMetadata___logo'
   | 'siteMetadata___banner'
-  | 'siteMetadata___squareLogo'
   | 'siteMetadata___favicon'
   | 'siteMetadata___shortName'
   | 'siteMetadata___author'
@@ -2978,7 +2977,6 @@ export type SiteSiteMetadata = {
   siteLanguage?: Maybe<Scalars['String']>;
   logo?: Maybe<Scalars['String']>;
   banner?: Maybe<Scalars['String']>;
-  squareLogo?: Maybe<Scalars['String']>;
   favicon?: Maybe<Scalars['String']>;
   shortName?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -2996,7 +2994,6 @@ export type SiteSiteMetadataFilterInput = {
   siteLanguage?: Maybe<StringQueryOperatorInput>;
   logo?: Maybe<StringQueryOperatorInput>;
   banner?: Maybe<StringQueryOperatorInput>;
-  squareLogo?: Maybe<StringQueryOperatorInput>;
   favicon?: Maybe<StringQueryOperatorInput>;
   shortName?: Maybe<StringQueryOperatorInput>;
   author?: Maybe<StringQueryOperatorInput>;
