@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import '../styles/layout.css';
-import { css } from '@emotion/core';
 import SEO from './SEO';
 
 type Props = {

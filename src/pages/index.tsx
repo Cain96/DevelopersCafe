@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
-import Img, { FixedObject } from "gatsby-image";
+import Img, { FixedObject } from 'gatsby-image';
 import Layout from '../components/Layout';
 import '../styles/index.scss';
 
@@ -18,18 +18,18 @@ type Props = {
     squareLogo: {
       childImageSharp: {
         fixed: FixedObject;
-      }
-    },
+      };
+    };
     kosukeIcon: {
       childImageSharp: {
         fixed: FixedObject;
-      }
-    },
+      };
+    };
     kurokenIcon: {
       childImageSharp: {
         fixed: FixedObject;
-      }
-    }
+      };
+    };
   };
 };
 
@@ -38,7 +38,11 @@ const IndexPage: FC<Props> = ({ location, data }) => {
     <Layout location={location}>
       <div className="top">
         <div className="top__profile">
-          <Img className="top__image" alt="ロゴ画像" fixed={data.squareLogo.childImageSharp.fixed} />
+          <Img
+            className="top__image"
+            alt="ロゴ画像"
+            fixed={data.squareLogo.childImageSharp.fixed}
+          />
 
           <div className="top__info">
             <span>
@@ -56,12 +60,20 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             <h2 className="top__starringTitle">Starring</h2>
             <div className="top__bioContainer">
               <div className="top__bioWrapper">
-              <Img className="top__bioImage" alt="アイコン画像" fixed={data.kurokenIcon.childImageSharp.fixed} />
+                <Img
+                  className="top__bioImage"
+                  alt="アイコン画像"
+                  fixed={data.kurokenIcon.childImageSharp.fixed}
+                />
                 <div className="top__bioName">くろけん</div>
               </div>
 
               <div className="top__bioWrapper">
-                <Img className="top__bioImage" alt="アイコン画像" fixed={data.kosukeIcon.childImageSharp.fixed} />
+                <Img
+                  className="top__bioImage"
+                  alt="アイコン画像"
+                  fixed={data.kosukeIcon.childImageSharp.fixed}
+                />
                 <div className="top__bioName">こうすけ</div>
               </div>
             </div>
@@ -77,8 +89,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
         </div>
 
         <div className="top__episodesContainer">
-          {(() => {
-            const index = [...Array(11)].map((_, i) => 11 - i);
+          {((): JSX.Element => {
+            const index = [...Array(11)].map((_, i): number => 11 - i);
             let episodes: Array<JSX.Element> = [];
             episodes = index.map((i) => {
               return (
