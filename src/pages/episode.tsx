@@ -1,19 +1,41 @@
 import React, { FC } from 'react';
 import Link from 'gatsby-link';
+import { graphql } from 'gatsby';
+import Img, { FixedObject } from 'gatsby-image';
 import Layout from '../components/Layout';
 import '../styles/episode.scss';
 
 type Props = {
   location: Location;
+  data: {
+    squareLogo: {
+      childImageSharp: {
+        fixed: FixedObject;
+      };
+    };
+    kosukeIcon: {
+      childImageSharp: {
+        fixed: FixedObject;
+      };
+    };
+    kurokenIcon: {
+      childImageSharp: {
+        fixed: FixedObject;
+      };
+    };
+  };
 };
 
-const EpisodePage: FC<Props> = ({ location }) => {
+const EpisodePage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
       <div className="episode">
         <div className="episode__profile">
-          {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="episode__image" />
+          <Img
+            className="episode__image"
+            alt="ロゴ画像"
+            fixed={data.squareLogo.childImageSharp.fixed}
+          />
 
           <div className="episode__info">
             <span>
@@ -31,12 +53,20 @@ const EpisodePage: FC<Props> = ({ location }) => {
             <h2 className="episode__starringTitle">Starring</h2>
             <div className="episode__bioContainer">
               <div className="episode__bioWrapper">
-                <div className="episode__bioImage" />
+                <Img
+                  className="episode__bioImage"
+                  alt="アイコン画像"
+                  fixed={data.kurokenIcon.childImageSharp.fixed}
+                />
                 <div className="episode__bioName">くろけん</div>
               </div>
 
               <div className="episode__bioWrapper">
-                <div className="episode__bioImage" />
+                <Img
+                  className="episode__bioImage"
+                  alt="アイコン画像"
+                  fixed={data.kosukeIcon.childImageSharp.fixed}
+                />
                 <div className="episode__bioName">こうすけ</div>
               </div>
             </div>
@@ -88,5 +118,31 @@ const EpisodePage: FC<Props> = ({ location }) => {
     </Layout>
   );
 };
+
+export const pageQuery = graphql`
+  query EpisodeQuery {
+    squareLogo: file(relativePath: { eq: "square-logo.png" }) {
+      childImageSharp {
+        fixed(width: 330, height: 330) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`;
 
 export default EpisodePage;

@@ -10,11 +10,6 @@ import '../styles/index.scss';
 type Props = {
   location: Location;
   data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
     squareLogo: {
       childImageSharp: {
         fixed: FixedObject;
@@ -121,11 +116,6 @@ const IndexPage: FC<Props> = ({ location, data }) => {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     squareLogo: file(relativePath: { eq: "square-logo.png" }) {
       childImageSharp {
         fixed(width: 330, height: 330) {
