@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
