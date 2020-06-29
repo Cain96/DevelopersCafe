@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
+import { css } from '@emotion/core';
 import Layout from '../components/Layout';
-import '../styles/episode.scss';
 
 type Props = {
   location: Location;
@@ -26,18 +26,92 @@ type Props = {
   };
 };
 
+// FIXME: font-size を em → remに修正
+const episodeStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 100px 0;
+  font-size: 10px;
+`;
+
+const episodeProfileStyle = css`
+  flex-basis: 25%;
+  margin-right: 36px;
+`;
+
+const episodeInfoStyle = css`
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 2em;
+`;
+
+const episodeStarringStyle = css`
+  margin-top: 20px;
+`;
+
+const episodeStarringTitleStyle = css`
+  font-size: 4em;
+  border-bottom: 1px solid #707070;
+  text-align: center;
+`;
+
+const episodeBioContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const episodeBioWrapperStyle = css`
+  margin: auto;
+  text-align: center;
+`;
+
+const episodeBioImageStyle = css`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+`;
+
+const episodeBioNameStyle = css`
+  margin-top: 20px;
+  font-size: 2.4em;
+`;
+
+const episodeAboutLinkStyle = css`
+  display: block;
+  color: hsla(0, 0%, 0%, 0.8);
+  text-align: center;
+  margin-top: 28px;
+  font-weight: bold;
+  font-size: 4em;
+`;
+
+const episodeContentDetailStyle = css`
+  font-size: 2em;
+  margin-top: 32px;
+`;
+
+const episodeShownotesTitleStyle = css`
+  margin-top: 32px;
+  border-top: 1px solid #707070;
+  padding-top: 32px;
+`;
+
+const episodeShownotesContentStyle = css`
+  font-size: 2em;
+`;
+
 const EpisodePage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
-      <div className="episode">
-        <div className="episode__profile">
-          <Img
-            className="episode__image"
-            alt="ロゴ画像"
-            fixed={data.squareLogo.childImageSharp.fixed}
-          />
+      <div css={episodeStyle}>
+        <div css={episodeProfileStyle}>
+          <Img alt="ロゴ画像" fixed={data.squareLogo.childImageSharp.fixed} />
 
-          <div className="episode__info">
+          <div css={episodeInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
               <br />
@@ -49,39 +123,35 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
             </span>
           </div>
 
-          <div className="episode__starring">
-            <h2 className="episode__starringTitle">Starring</h2>
-            <div className="episode__bioContainer">
-              <div className="episode__bioWrapper">
+          <div css={episodeStarringStyle}>
+            <h2 css={episodeStarringTitleStyle}>Starring</h2>
+            <div css={episodeBioContainerStyle}>
+              <div css={episodeBioWrapperStyle}>
                 <Img
-                  className="episode__bioImage"
+                  css={episodeBioImageStyle}
                   alt="アイコン画像"
                   fixed={data.kurokenIcon.childImageSharp.fixed}
                 />
-                <div className="episode__bioName">くろけん</div>
+                <div css={episodeBioNameStyle}>くろけん</div>
               </div>
 
-              <div className="episode__bioWrapper">
+              <div css={episodeBioWrapperStyle}>
                 <Img
-                  className="episode__bioImage"
+                  css={episodeBioImageStyle}
                   alt="アイコン画像"
                   fixed={data.kosukeIcon.childImageSharp.fixed}
                 />
-                <div className="episode__bioName">こうすけ</div>
+                <div css={episodeBioNameStyle}>こうすけ</div>
               </div>
             </div>
           </div>
 
-          <Link to="/about/">
-            <h2 className="episode__aboutLink">
-              About Us
-              {/* TODO: font-awesome のパッケージをインストールする */}
-              <i className="fas fa-arrow-right" />
-            </h2>
+          <Link to="/about/" css={episodeAboutLinkStyle}>
+            About Us
           </Link>
         </div>
 
-        <div className="episode__content">
+        <div>
           {/* iframe 挿入 */}
           <iframe
             title="anchor player"
@@ -92,7 +162,7 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
             scrolling="no"
           />
 
-          <div className="episode__contentDetail">
+          <div css={episodeContentDetailStyle}>
             <span>
               今回は新社会人になって二ヶ月になったこうすけに悩んでいることを聞いてみました。
               <br />
@@ -102,17 +172,15 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
             </span>
           </div>
 
-          <div className="episode__shownotes">
-            <h2 className="episode__shownotesTitle">ShowNotes</h2>
+          <h2 css={episodeShownotesTitleStyle}>ShowNotes</h2>
 
-            <ul className="episode__shownotesContent">
-              <li>リモート入社式と新入社員のオンボーディグ</li>
-              <li>リモート飲みとは？</li>
-              <li>運動不足どう解消してる？</li>
-              <li>Uber Eatsを使ってみた</li>
-              <li>maintainableなcssとは何なのだろうか</li>
-            </ul>
-          </div>
+          <ul css={episodeShownotesContentStyle}>
+            <li>リモート入社式と新入社員のオンボーディグ</li>
+            <li>リモート飲みとは？</li>
+            <li>運動不足どう解消してる？</li>
+            <li>Uber Eatsを使ってみた</li>
+            <li>maintainableなcssとは何なのだろうか</li>
+          </ul>
         </div>
       </div>
     </Layout>
