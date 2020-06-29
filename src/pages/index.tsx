@@ -1,9 +1,8 @@
-/** @jsx jsx */
 import { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import Layout from '../components/Layout';
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator

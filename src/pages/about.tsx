@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import Link from 'gatsby-link';
 import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
+import { css } from '@emotion/core';
 import Layout from '../components/Layout';
-import '../styles/about.scss';
 
 type Props = {
   location: Location;
@@ -26,19 +26,93 @@ type Props = {
   };
 };
 
+// FIXME: font-size を em → remに修正
+const aboutStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 100px 0;
+  font-size: 10px;
+`;
+
+const aboutProfileStyle = css`
+  flex-basis: 25%;
+  margin-right: 36px;
+`;
+
+const aboutImageStyle = css`
+  width: 100%;
+  display: block;
+`;
+
+const aboutInfoStyle = css`
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 2em;
+`;
+
+const aboutIndexLinkStyle = css`
+  display: block;
+  text-align: center;
+  color: hsla(0, 0%, 0%, 0.8);
+  margin-top: 28px;
+  font-size: 4em;
+`;
+
+const aboutStarringStyle = css`
+  flex-basis: 75%;
+`;
+
+const aboutStarringTitleStyle = css`
+  font-size: 4em;
+  text-align: center;
+  border-bottom: 1px solid #707070;
+`;
+
+const aboutBioContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const aboutBioWrapperStyle = css`
+  margin: auto;
+  text-align: center;
+  flex: 1 0;
+
+  & + & {
+    margin-left: 20px;
+  }
+`;
+
+const aboutBioImageStyle = css`
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border-radius: 50%;
+`;
+
+const aboutBioNameStyle = css`
+  margin-top: 24px;
+  font-size: 2.4em;
+`;
+
+const aboutBioTextStyle = css`
+  margin-top: 20px;
+  font-size: 2.4em;
+`;
+
 const AboutPage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
-      <div className="about">
-        <div className="about__profile">
+      <div css={aboutStyle}>
+        <div css={aboutProfileStyle}>
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <Img
-            className="about__image"
-            alt="ロゴ画像"
-            fixed={data.squareLogo.childImageSharp.fixed}
-          />
+          <Img css={aboutImageStyle} alt="ロゴ画像" fixed={data.squareLogo.childImageSharp.fixed} />
 
-          <div className="about__info">
+          <div css={aboutInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
               <br />
@@ -51,21 +125,21 @@ const AboutPage: FC<Props> = ({ location, data }) => {
           </div>
 
           <Link to="/">
-            <h2 className="about__indexLink">Episodes</h2>
+            <h2 css={aboutIndexLinkStyle}>Episodes</h2>
           </Link>
         </div>
 
-        <div className="about__starring">
-          <h2 className="about__starringTitle">Starring</h2>
-          <div className="about__bioContainer">
-            <div className="about__bioWrapper">
+        <div css={aboutStarringStyle}>
+          <h2 css={aboutStarringTitleStyle}>Starring</h2>
+          <div css={aboutBioContainerStyle}>
+            <div css={aboutBioWrapperStyle}>
               <Img
-                className="about__bioImage"
+                css={aboutBioImageStyle}
                 alt="アイコン画像"
                 fixed={data.kurokenIcon.childImageSharp.fixed}
               />
-              <div className="about__bioName">くろけん</div>
-              <div className="about__bioText">
+              <div css={aboutBioNameStyle}>くろけん</div>
+              <div css={aboutBioTextStyle}>
                 <span>
                   自己紹介ですエンジニアです
                   <br />
@@ -82,14 +156,14 @@ const AboutPage: FC<Props> = ({ location, data }) => {
               </div>
             </div>
 
-            <div className="about__bioWrapper">
+            <div css={aboutBioWrapperStyle}>
               <Img
-                className="about__bioImage"
+                css={aboutBioImageStyle}
                 alt="アイコン画像"
                 fixed={data.kosukeIcon.childImageSharp.fixed}
               />
-              <div className="about__bioName">こうすけ</div>
-              <div className="about__bioText">
+              <div css={aboutBioNameStyle}>こうすけ</div>
+              <div css={aboutBioTextStyle}>
                 <span>
                   自己紹介ですエンジニアです
                   <br />
