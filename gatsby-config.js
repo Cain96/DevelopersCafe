@@ -10,6 +10,13 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-sass`,
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/data/`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
