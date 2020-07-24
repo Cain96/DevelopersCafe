@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
 import { css } from '@emotion/core';
 import Layout from '../components/Layout';
+import { Query } from '../../types/graphql-types';
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -25,6 +26,7 @@ type Props = {
         fixed: FixedObject;
       };
     };
+    allEpisodesJson: Query["allEpisodesJson"]
   };
 };
 
@@ -174,22 +176,19 @@ const IndexPage: FC<Props> = ({ location, data }) => {
 
         <div css={topEpisodesContainerStyle}>
           {((): JSX.Element => {
-            const index = [...Array(11)].map((_, i): number => 11 - i);
-            let episodes: Array<JSX.Element> = [];
-            episodes = index.map((i) => {
+            // const index = [...Array(11)].map((_, i): number => 11 - i);
+            // let episodes: Array<JSX.Element> = [];
+            let episodes = data.allEpisodesJson.edges.map((episode) => {
               return (
                 <div css={topEpisodeStyle}>
                   {/* TODO: <Link to={'/episode/' + i}> に直す */}
                   <Link to="/episode/">
-                    <div css={topEpisodeDateStyle}>2020/XX/XX</div>
+                    <div css={topEpisodeDateStyle}>{episode.node.date}</div>
 
-                    <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
+                    <h2 css={topEpisodeTitleStyle}>#{episode.node.index}: {episode.node.title}</h2>
 
                     <div css={topEpisodeExplainStyle}>
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
-                      {/*
-                       */}
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
+                      {episode.node.description}
                     </div>
                   </Link>
                 </div>
@@ -223,6 +222,18 @@ export const pageQuery = graphql`
       childImageSharp {
         fixed(width: 100, height: 100) {
           ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    allEpisodesJson {
+      edges {
+        node {
+          index
+          id
+          date
+          title
+          shownotes
+          description
         }
       }
     }

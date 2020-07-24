@@ -1,4 +1,5 @@
 export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -348,6 +349,168 @@ export type DuotoneGradient = {
   highlight: Scalars['String'];
   shadow: Scalars['String'];
   opacity?: Maybe<Scalars['Int']>;
+};
+
+export type EpisodesJson = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  index?: Maybe<Scalars['Int']>;
+  date?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  shownotes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type EpisodesJsonConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<EpisodesJsonEdge>;
+  nodes: Array<EpisodesJson>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<EpisodesJsonGroupConnection>;
+};
+
+
+export type EpisodesJsonConnectionDistinctArgs = {
+  field: EpisodesJsonFieldsEnum;
+};
+
+
+export type EpisodesJsonConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: EpisodesJsonFieldsEnum;
+};
+
+export type EpisodesJsonEdge = {
+  next?: Maybe<EpisodesJson>;
+  node: EpisodesJson;
+  previous?: Maybe<EpisodesJson>;
+};
+
+export type EpisodesJsonFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'index'
+  | 'date'
+  | 'title'
+  | 'shownotes'
+  | 'description';
+
+export type EpisodesJsonFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  index?: Maybe<IntQueryOperatorInput>;
+  date?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  shownotes?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+};
+
+export type EpisodesJsonFilterListInput = {
+  elemMatch?: Maybe<EpisodesJsonFilterInput>;
+};
+
+export type EpisodesJsonGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<EpisodesJsonEdge>;
+  nodes: Array<EpisodesJson>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type EpisodesJsonSortInput = {
+  fields?: Maybe<Array<Maybe<EpisodesJsonFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type FeedAnchorPodCast = Node & {
@@ -857,6 +1020,7 @@ export type File = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
+  childrenEpisodesJson?: Maybe<Array<Maybe<EpisodesJson>>>;
 };
 
 
@@ -1153,7 +1317,51 @@ export type FileFieldsEnum =
   | 'internal___ignoreType'
   | 'internal___mediaType'
   | 'internal___owner'
-  | 'internal___type';
+  | 'internal___type'
+  | 'childrenEpisodesJson'
+  | 'childrenEpisodesJson___id'
+  | 'childrenEpisodesJson___parent___id'
+  | 'childrenEpisodesJson___parent___parent___id'
+  | 'childrenEpisodesJson___parent___parent___children'
+  | 'childrenEpisodesJson___parent___children'
+  | 'childrenEpisodesJson___parent___children___id'
+  | 'childrenEpisodesJson___parent___children___children'
+  | 'childrenEpisodesJson___parent___internal___content'
+  | 'childrenEpisodesJson___parent___internal___contentDigest'
+  | 'childrenEpisodesJson___parent___internal___description'
+  | 'childrenEpisodesJson___parent___internal___fieldOwners'
+  | 'childrenEpisodesJson___parent___internal___ignoreType'
+  | 'childrenEpisodesJson___parent___internal___mediaType'
+  | 'childrenEpisodesJson___parent___internal___owner'
+  | 'childrenEpisodesJson___parent___internal___type'
+  | 'childrenEpisodesJson___children'
+  | 'childrenEpisodesJson___children___id'
+  | 'childrenEpisodesJson___children___parent___id'
+  | 'childrenEpisodesJson___children___parent___children'
+  | 'childrenEpisodesJson___children___children'
+  | 'childrenEpisodesJson___children___children___id'
+  | 'childrenEpisodesJson___children___children___children'
+  | 'childrenEpisodesJson___children___internal___content'
+  | 'childrenEpisodesJson___children___internal___contentDigest'
+  | 'childrenEpisodesJson___children___internal___description'
+  | 'childrenEpisodesJson___children___internal___fieldOwners'
+  | 'childrenEpisodesJson___children___internal___ignoreType'
+  | 'childrenEpisodesJson___children___internal___mediaType'
+  | 'childrenEpisodesJson___children___internal___owner'
+  | 'childrenEpisodesJson___children___internal___type'
+  | 'childrenEpisodesJson___internal___content'
+  | 'childrenEpisodesJson___internal___contentDigest'
+  | 'childrenEpisodesJson___internal___description'
+  | 'childrenEpisodesJson___internal___fieldOwners'
+  | 'childrenEpisodesJson___internal___ignoreType'
+  | 'childrenEpisodesJson___internal___mediaType'
+  | 'childrenEpisodesJson___internal___owner'
+  | 'childrenEpisodesJson___internal___type'
+  | 'childrenEpisodesJson___index'
+  | 'childrenEpisodesJson___date'
+  | 'childrenEpisodesJson___title'
+  | 'childrenEpisodesJson___shownotes'
+  | 'childrenEpisodesJson___description';
 
 export type FileFilterInput = {
   sourceInstanceName?: Maybe<StringQueryOperatorInput>;
@@ -1195,6 +1403,7 @@ export type FileFilterInput = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
+  childrenEpisodesJson?: Maybe<EpisodesJsonFilterListInput>;
 };
 
 export type FileGroupConnection = {
@@ -1779,6 +1988,7 @@ export type PageInfo = {
   itemCount: Scalars['Int'];
   pageCount: Scalars['Int'];
   perPage?: Maybe<Scalars['Int']>;
+  totalCount: Scalars['Int'];
 };
 
 export type Potrace = {
@@ -1816,6 +2026,8 @@ export type Query = {
   allFeedAnchorPodCastMeta: FeedAnchorPodCastMetaConnection;
   feedAnchorPodCast?: Maybe<FeedAnchorPodCast>;
   allFeedAnchorPodCast: FeedAnchorPodCastConnection;
+  episodesJson?: Maybe<EpisodesJson>;
+  allEpisodesJson: EpisodesJsonConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -1863,6 +2075,7 @@ export type QueryFileArgs = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
+  childrenEpisodesJson?: Maybe<EpisodesJsonFilterListInput>;
 };
 
 
@@ -1951,7 +2164,7 @@ export type QueryAllSitePageArgs = {
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
+  port?: Maybe<DateQueryOperatorInput>;
   host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
@@ -2047,6 +2260,27 @@ export type QueryAllFeedAnchorPodCastArgs = {
 };
 
 
+export type QueryEpisodesJsonArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  index?: Maybe<IntQueryOperatorInput>;
+  date?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  shownotes?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllEpisodesJsonArgs = {
+  filter?: Maybe<EpisodesJsonFilterInput>;
+  sort?: Maybe<EpisodesJsonSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySiteBuildMetadataArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2091,7 +2325,7 @@ export type QueryAllSitePluginArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
+  port?: Maybe<Scalars['Date']>;
   host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
@@ -2103,6 +2337,14 @@ export type Site = Node & {
 
 
 export type SiteBuildTimeArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type SitePortArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -2400,7 +2642,7 @@ export type SiteFieldsEnum =
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<IntQueryOperatorInput>;
+  port?: Maybe<DateQueryOperatorInput>;
   host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
@@ -2596,8 +2838,8 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
-  | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___path'
+  | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___fileName'
   | 'pluginCreator___pluginOptions___content'
   | 'pluginCreator___pluginOptions___printRejected'
@@ -2610,6 +2852,11 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___themeColor'
   | 'pluginCreator___pluginOptions___display'
   | 'pluginCreator___pluginOptions___icon'
+  | 'pluginCreator___pluginOptions___cache_busting_mode'
+  | 'pluginCreator___pluginOptions___include_favicon'
+  | 'pluginCreator___pluginOptions___legacy'
+  | 'pluginCreator___pluginOptions___theme_color_in_head'
+  | 'pluginCreator___pluginOptions___cacheDigest'
   | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
@@ -2619,7 +2866,6 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___packageJson___description'
   | 'pluginCreator___packageJson___version'
   | 'pluginCreator___packageJson___main'
-  | 'pluginCreator___packageJson___author'
   | 'pluginCreator___packageJson___license'
   | 'pluginCreator___packageJson___dependencies'
   | 'pluginCreator___packageJson___dependencies___name'
@@ -2797,8 +3043,8 @@ export type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
-  | 'pluginOptions___name'
   | 'pluginOptions___path'
+  | 'pluginOptions___name'
   | 'pluginOptions___fileName'
   | 'pluginOptions___content'
   | 'pluginOptions___printRejected'
@@ -2811,6 +3057,11 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___themeColor'
   | 'pluginOptions___display'
   | 'pluginOptions___icon'
+  | 'pluginOptions___cache_busting_mode'
+  | 'pluginOptions___include_favicon'
+  | 'pluginOptions___legacy'
+  | 'pluginOptions___theme_color_in_head'
+  | 'pluginOptions___cacheDigest'
   | 'pluginOptions___pathCheck'
   | 'nodeAPIs'
   | 'browserAPIs'
@@ -2820,7 +3071,6 @@ export type SitePluginFieldsEnum =
   | 'packageJson___description'
   | 'packageJson___version'
   | 'packageJson___main'
-  | 'packageJson___author'
   | 'packageJson___license'
   | 'packageJson___dependencies'
   | 'packageJson___dependencies___name'
@@ -2863,7 +3113,6 @@ export type SitePluginPackageJson = {
   description?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   main?: Maybe<Scalars['String']>;
-  author?: Maybe<Scalars['String']>;
   license?: Maybe<Scalars['String']>;
   dependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDependencies>>>;
   devDependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDevDependencies>>>;
@@ -2904,7 +3153,6 @@ export type SitePluginPackageJsonFilterInput = {
   description?: Maybe<StringQueryOperatorInput>;
   version?: Maybe<StringQueryOperatorInput>;
   main?: Maybe<StringQueryOperatorInput>;
-  author?: Maybe<StringQueryOperatorInput>;
   license?: Maybe<StringQueryOperatorInput>;
   dependencies?: Maybe<SitePluginPackageJsonDependenciesFilterListInput>;
   devDependencies?: Maybe<SitePluginPackageJsonDevDependenciesFilterListInput>;
@@ -2927,8 +3175,8 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
-  name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   fileName?: Maybe<Scalars['String']>;
   content?: Maybe<Array<Maybe<Scalars['String']>>>;
   printRejected?: Maybe<Scalars['Boolean']>;
@@ -2941,12 +3189,17 @@ export type SitePluginPluginOptions = {
   themeColor?: Maybe<Scalars['String']>;
   display?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
+  cache_busting_mode?: Maybe<Scalars['String']>;
+  include_favicon?: Maybe<Scalars['Boolean']>;
+  legacy?: Maybe<Scalars['Boolean']>;
+  theme_color_in_head?: Maybe<Scalars['Boolean']>;
+  cacheDigest?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   fileName?: Maybe<StringQueryOperatorInput>;
   content?: Maybe<StringQueryOperatorInput>;
   printRejected?: Maybe<BooleanQueryOperatorInput>;
@@ -2959,6 +3212,11 @@ export type SitePluginPluginOptionsFilterInput = {
   themeColor?: Maybe<StringQueryOperatorInput>;
   display?: Maybe<StringQueryOperatorInput>;
   icon?: Maybe<StringQueryOperatorInput>;
+  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
+  include_favicon?: Maybe<BooleanQueryOperatorInput>;
+  legacy?: Maybe<BooleanQueryOperatorInput>;
+  theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
+  cacheDigest?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 };
 
@@ -3019,7 +3277,7 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
-export type SeoQueryVariables = {};
+export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SeoQuery = { site?: Maybe<(
@@ -3030,20 +3288,20 @@ export type SeoQuery = { site?: Maybe<(
     )> }
   )> };
 
-export type AboutQueryQueryVariables = {};
+export type AboutQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AboutQueryQuery = { squareLogo?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kosukeIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kurokenIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
-export type EpisodeQueryQueryVariables = {};
+export type EpisodeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type EpisodeQueryQuery = { squareLogo?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kosukeIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kurokenIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
-export type IndexQueryQueryVariables = {};
+export type IndexQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexQueryQuery = { squareLogo?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kosukeIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kurokenIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }> };
+export type IndexQueryQuery = { squareLogo?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kosukeIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, kurokenIcon?: Maybe<{ childImageSharp?: Maybe<{ fixed?: Maybe<GatsbyImageSharpFixedFragment> }> }>, allEpisodesJson: { edges: Array<{ node: Pick<EpisodesJson, 'index' | 'id' | 'date' | 'title' | 'shownotes' | 'description'> }> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
