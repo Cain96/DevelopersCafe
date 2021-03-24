@@ -17,6 +17,8 @@ export const pageQuery = graphql`
   }
 `;
 
+const indexList = [...Array(11)].map((_, i) => 11 - i);
+
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
 type Props = {
@@ -30,7 +32,7 @@ type Props = {
   };
 };
 
-const IndexPage: FC<Props> = ({ location, data }) => {
+const IndexPage: FC<Props> = ({ location }) => {
   return (
     <Layout location={location}>
       <div css={topStyle}>
@@ -74,30 +76,23 @@ const IndexPage: FC<Props> = ({ location, data }) => {
         </div>
 
         <div css={topEpisodesContainerStyle}>
-          {(() => {
-            const index = [...Array(11)].map((_, i) => 11 - i);
-            let episodes: Array<JSX.Element> = [];
-            episodes = index.map((i) => {
-              return (
-                <div css={topEpisodeStyle} key={i}>
-                  {/* TODO: <Link to={'/episode/' + i}> に直す */}
-                  <Link to="/episode/">
-                    <div css={topEpisodeDataStyle}>2020/XX/XX</div>
+          {indexList.map((i) => (
+            <div css={topEpisodeStyle} key={i}>
+              {/* TODO: <Link to={'/episode/' + i}> に直す */}
+              <Link to="/episode/">
+                <div css={topEpisodeDataStyle}>2020/XX/XX</div>
 
-                    <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
+                <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
 
-                    <div css={topEpisodeExplainStyle}>
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
-                      {/*
-                       */}
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
-                    </div>
-                  </Link>
+                <div css={topEpisodeExplainStyle}>
+                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
+                  {/*
+                   */}
+                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
                 </div>
-              );
-            });
-            return <ul>{episodes}</ul>;
-          })()}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
