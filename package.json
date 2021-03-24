@@ -9,7 +9,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
     "test": "echo \"no test specified\""
   },
