@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+/** @jsx jsx */
+import { FC } from 'react';
 import Link from 'gatsby-link';
+import { css, jsx } from '@emotion/core';
 import Layout from '../components/Layout';
-import '../styles/about.scss';
+import { black, borderGray, navajoWhite } from '../lib/color';
+import { rgba } from '../lib/utils/rgba';
 
 type Props = {
   location: Location;
@@ -10,12 +13,12 @@ type Props = {
 const AboutPage: FC<Props> = ({ location }) => {
   return (
     <Layout location={location}>
-      <div className="about">
-        <div className="about__profile">
+      <div css={aboutStyle}>
+        <div css={aboutProfileStyle}>
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="about__image" />
+          <div css={aboutImageStyle} />
 
-          <div className="about__info">
+          <div css={aboutInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
               <br />
@@ -28,17 +31,17 @@ const AboutPage: FC<Props> = ({ location }) => {
           </div>
 
           <Link to="/">
-            <h2 className="about__indexLink">Episodes</h2>
+            <h2 css={aboutIndexLinkStyle}>Episodes</h2>
           </Link>
         </div>
 
-        <div className="about__starring">
-          <h2 className="about__starringTitle">Starring</h2>
-          <div className="about__bioContainer">
-            <div className="about__bioWrapper">
-              <div className="about__bioImage" />
-              <div className="about__bioName">くろけん</div>
-              <div className="about__bioText">
+        <div css={aboutStarringStyle}>
+          <h2 css={aboutStarringTitleStyle}>Starring</h2>
+          <div css={aboutBioContainerStyle}>
+            <div css={aboutBioWrapperStyle}>
+              <div css={aboutBioImageStyle} />
+              <div css={aboutBioNameStyle}>くろけん</div>
+              <div css={aboutBioTextStyle}>
                 <span>
                   自己紹介ですエンジニアです
                   <br />
@@ -55,10 +58,10 @@ const AboutPage: FC<Props> = ({ location }) => {
               </div>
             </div>
 
-            <div className="about__bioWrapper">
-              <div className="about__bioImage" />
-              <div className="about__bioName">こうすけ</div>
-              <div className="about__bioText">
+            <div css={aboutBioWrapperStyle}>
+              <div css={aboutBioImageStyle} />
+              <div css={aboutBioNameStyle}>こうすけ</div>
+              <div css={aboutBioTextStyle}>
                 <span>
                   自己紹介ですエンジニアです
                   <br />
@@ -80,5 +83,90 @@ const AboutPage: FC<Props> = ({ location }) => {
     </Layout>
   );
 };
+
+const aboutStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 100px 0;
+`;
+
+const aboutProfileStyle = css`
+  flex-basis: 25%;
+  margin-right: 36px;
+`;
+
+const aboutImageStyle = css`
+  width: 100%;
+  background-color: ${navajoWhite};
+  display: block;
+
+  &:before {
+    padding-top: 100%;
+    display: block;
+    background-color: ${navajoWhite};
+    content: '';
+  }
+`;
+
+const aboutInfoStyle = css`
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 1.25rem;
+`;
+
+const aboutStarringStyle = css`
+  flex-basis: 75%;
+`;
+
+const aboutStarringTitleStyle = css`
+  font-size: 2.5rem;
+  text-align: center;
+  border-bottom: 1px solid ${borderGray};
+`;
+
+const aboutBioContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const aboutBioWrapperStyle = css`
+  margin: auto;
+  text-align: center;
+  flex: 1 0;
+
+  & + & {
+    margin-left: 20px;
+  }
+`;
+
+const aboutBioImageStyle = css`
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: ${navajoWhite};
+`;
+
+const aboutBioNameStyle = css`
+  margin-top: 24px;
+  font-size: 1.5rem;
+`;
+
+const aboutBioTextStyle = css`
+  margin-top: 20px;
+  font-size: 1.5rem;
+`;
+
+const aboutIndexLinkStyle = css`
+  display: block;
+  text-align: center;
+  color: ${rgba(black, 0.8)};
+  margin-top: 28px;
+  font-size: 2.5rem;
+`;
 
 export default AboutPage;
