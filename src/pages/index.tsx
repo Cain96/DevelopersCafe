@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { FC } from 'react';
 import Link from 'gatsby-link';
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import { graphql } from 'gatsby';
 import Img, { FixedObject } from 'gatsby-image';
 import Layout from '../components/Layout';
