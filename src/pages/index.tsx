@@ -3,15 +3,39 @@ import { FC } from 'react';
 import Link from 'gatsby-link';
 import { css, jsx } from '@emotion/core';
 import { graphql } from 'gatsby';
+import Img, { FixedObject } from 'gatsby-image';
 import Layout from '../components/Layout';
-import { black, borderGray, navajoWhite } from '../lib/color';
+import { black, borderGray, navajoWhite, pastelOrange } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
+import { IndexPageQuery } from '../../types/graphql-types';
+import { kosuketwitterUrl, kurokenTwitterUrl } from '../lib/data/urls';
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query IndexPage {
     site {
       siteMetadata {
         title
+      }
+    }
+    squareLogo: file(relativePath: { eq: "square-logo.png" }) {
+      childImageSharp {
+        fixed(width: 330, height: 330) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
       }
     }
   }
@@ -23,22 +47,19 @@ const indexList = [...Array(11)].map((_, i) => 11 - i);
 // to generate all types from graphQL schema
 type Props = {
   location: Location;
-  data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
-  };
+  data: IndexPageQuery;
 };
 
-const IndexPage: FC<Props> = ({ location }) => {
+const IndexPage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
       <div css={topStyle}>
-        <div css={topProfileStyle} className="top__profile">
-          {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div css={topImageStyle} />
+        <div css={topProfileStyle}>
+          <Img
+            css={topImageStyle}
+            alt="ロゴ画像"
+            fixed={data.squareLogo?.childImageSharp?.fixed as FixedObject}
+          />
 
           <div css={topInfoStyle}>
             <span>
@@ -55,14 +76,32 @@ const IndexPage: FC<Props> = ({ location }) => {
           <div css={topStarringStyle}>
             <h2 css={topStarringTitleStyle}>Starring</h2>
             <div css={topBioContainerStyle}>
-              <div css={topBioWrapperStyle}>
-                <div css={topBioImageStyle} />
+              <a
+                href={kurokenTwitterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                css={topBioWrapperStyle}
+              >
+                <Img
+                  css={topBioImageStyle}
+                  alt="くろけんのアイコン画像"
+                  fixed={data.kurokenIcon?.childImageSharp?.fixed as FixedObject}
+                />
                 <div css={topBioNameStyle}>くろけん</div>
-              </div>
-              <div css={topBioWrapperStyle}>
-                <div css={topBioImageStyle} />
+              </a>
+              <a
+                href={kosuketwitterUrl}
+                target="_blank"
+                rel="noopener noreferrer "
+                css={topBioWrapperStyle}
+              >
+                <Img
+                  css={topBioImageStyle}
+                  alt="こうすけのアイコン画像"
+                  fixed={data.kosukeIcon?.childImageSharp?.fixed as FixedObject}
+                />
                 <div css={topBioNameStyle}>こうすけ</div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -79,7 +118,7 @@ const IndexPage: FC<Props> = ({ location }) => {
           {indexList.map((i) => (
             <div css={topEpisodeStyle} key={i}>
               {/* TODO: <Link to={'/episode/' + i}> に直す */}
-              <Link to="/episode/">
+              <Link to="/episode/" css={topEpisodeLinkStyle}>
                 <div css={topEpisodeDataStyle}>2020/XX/XX</div>
 
                 <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
@@ -151,6 +190,7 @@ const topBioContainerStyle = css`
 const topBioWrapperStyle = css`
   margin: auto;
   text-align: center;
+  text-decoration: none;
 `;
 
 const topBioImageStyle = css`
@@ -178,25 +218,32 @@ const topEpisodesContainerStyle = css`
 `;
 
 const topEpisodeStyle = css`
-  padding: 16px 0;
+  padding: 16px 8px;
+  border-radius: 8px;
+  border: 1px solid ${borderGray};
+  background-color: ${pastelOrange};
 
   & + & {
-    border-top: 1px solid ${borderGray};
+    margin-top: 20px;
   }
 `;
 
+const topEpisodeLinkStyle = css`
+  text-decoration: none;
+`;
+
 const topEpisodeDataStyle = css`
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
 `;
 
 const topEpisodeTitleStyle = css`
-  font-size: 2.5rem;
+  font-size: 1.25rem;
   margin-top: 16px;
 `;
 
 const topEpisodeExplainStyle = css`
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin-top: 16px;
 `;
 

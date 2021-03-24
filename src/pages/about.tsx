@@ -2,21 +2,54 @@
 import { FC } from 'react';
 import Link from 'gatsby-link';
 import { css, jsx } from '@emotion/core';
+import { graphql } from 'gatsby';
+import Img, { FixedObject } from 'gatsby-image';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
+import { AboutPageQuery } from '../../types/graphql-types';
+
+export const pageQuery = graphql`
+  query AboutPage {
+    squareLogo: file(relativePath: { eq: "square-logo.png" }) {
+      childImageSharp {
+        fixed(width: 330, height: 330) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
+      childImageSharp {
+        fixed(width: 100, height: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`;
 
 type Props = {
   location: Location;
+  data: AboutPageQuery;
 };
 
-const AboutPage: FC<Props> = ({ location }) => {
+const AboutPage: FC<Props> = ({ location, data }) => {
   return (
     <Layout location={location}>
       <div css={aboutStyle}>
         <div css={aboutProfileStyle}>
-          {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div css={aboutImageStyle} />
+          <Img
+            css={aboutImageStyle}
+            alt="ロゴ画像"
+            fixed={data.squareLogo?.childImageSharp?.fixed as FixedObject}
+          />
 
           <div css={aboutInfoStyle}>
             <span>
@@ -39,27 +72,29 @@ const AboutPage: FC<Props> = ({ location }) => {
           <h2 css={aboutStarringTitleStyle}>Starring</h2>
           <div css={aboutBioContainerStyle}>
             <div css={aboutBioWrapperStyle}>
-              <div css={aboutBioImageStyle} />
+              <Img
+                css={aboutBioImageStyle}
+                alt="くろけんのアイコン画像"
+                fixed={data.kurokenIcon?.childImageSharp?.fixed as FixedObject}
+              />
               <div css={aboutBioNameStyle}>くろけん</div>
               <div css={aboutBioTextStyle}>
                 <span>
-                  自己紹介ですエンジニアです
+                  普段はユーザーに価値を届けるための仮説検証を回しており、施策設計、その効果検証、バックエンドからフロントエンドまで幅広くやっています。
                   <br />
-                  自己紹介ですエンジニアですです
+                  ユーザーのことを考えたサービス開発をすることが好きです。
                   <br />
-                  自己紹介ですエンジニアですですです
-                  <br />
-                  自己紹介ですエンジニアです
-                  <br />
-                  自己紹介ですエンジニアですです
-                  <br />
-                  自己紹介ですエンジニアですですです
+                  デザイン領域に興味があり、デザインとエンジニアリングの行き来をするようなサービス開発をするにはどうしたらよいか日々考えています。
                 </span>
               </div>
             </div>
 
             <div css={aboutBioWrapperStyle}>
-              <div css={aboutBioImageStyle} />
+              <Img
+                css={aboutBioImageStyle}
+                alt="こうすけのアイコン画像"
+                fixed={data.kosukeIcon?.childImageSharp?.fixed as FixedObject}
+              />
               <div css={aboutBioNameStyle}>こうすけ</div>
               <div css={aboutBioTextStyle}>
                 <span>
@@ -127,19 +162,15 @@ const aboutStarringTitleStyle = css`
 `;
 
 const aboutBioContainerStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 20px;
 `;
 
 const aboutBioWrapperStyle = css`
-  margin: auto;
   text-align: center;
   flex: 1 0;
 
   & + & {
-    margin-left: 20px;
+    margin-top: 20px;
   }
 `;
 
@@ -158,7 +189,8 @@ const aboutBioNameStyle = css`
 
 const aboutBioTextStyle = css`
   margin-top: 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  text-align: left;
 `;
 
 const aboutIndexLinkStyle = css`
