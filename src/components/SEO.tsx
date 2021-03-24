@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { SeoQuery } from '../../types/graphql-types';
 
 type Props = {
   title?: string;
@@ -11,7 +10,7 @@ type Props = {
 };
 
 const query = graphql`
-  query SEO {
+  query Seo {
     site {
       buildTime(formatString: "YYYY年MM月DD日")
       siteMetadata {
@@ -31,7 +30,7 @@ const query = graphql`
 `;
 
 const SEO: FC<Props> = ({ title, description, banner, pathname }) => {
-  const data: SeoQuery = useStaticQuery(query);
+  const data = useStaticQuery<GatsbyTypes.SeoQuery>(query);
 
   const siteUrl = data.site?.siteMetadata?.siteUrl || '';
 

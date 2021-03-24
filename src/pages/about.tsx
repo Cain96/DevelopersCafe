@@ -7,7 +7,6 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
-import { AboutPageQuery } from '../../types/graphql-types';
 
 export const pageQuery = graphql`
   query AboutPage {
@@ -31,7 +30,7 @@ export const pageQuery = graphql`
 
 type Props = {
   location: Location;
-  data: AboutPageQuery;
+  data: GatsbyTypes.AboutPageQuery;
 };
 
 const AboutPage: FC<Props> = ({ location, data }) => {
@@ -40,7 +39,8 @@ const AboutPage: FC<Props> = ({ location, data }) => {
       <div css={aboutStyle}>
         <div css={aboutProfileStyle}>
           <GatsbyImage
-            image={data.squareLogo?.childImageSharp?.gatsbyImageData}
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            image={data.squareLogo!.childImageSharp!.gatsbyImageData}
             css={aboutImageStyle}
             alt="ロゴ画像"
           />
@@ -67,7 +67,8 @@ const AboutPage: FC<Props> = ({ location, data }) => {
           <div css={aboutBioContainerStyle}>
             <div css={aboutBioWrapperStyle}>
               <GatsbyImage
-                image={data.kurokenIcon?.childImageSharp?.gatsbyImageData}
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                image={data.kurokenIcon!.childImageSharp!.gatsbyImageData}
                 css={aboutBioImageStyle}
                 alt="くろけんのアイコン画像"
               />
