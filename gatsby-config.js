@@ -18,12 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        content: [
-          path.join(
-            process.cwd(),
-            "src/**/!(*.d).{js,jsx,ts,tsx,md,mdx}"
-          ),
-        ],
+        content: [path.join(process.cwd(), 'src/**/!(*.d).{js,jsx,ts,tsx,md,mdx}')],
         printRejected: true,
         develop: false,
       },

@@ -1,8 +1,23 @@
-import React, { FC } from 'react';
+/** @jsx jsx */
+import { FC } from 'react';
 import Link from 'gatsby-link';
+import { css, jsx } from '@emotion/core';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import '../styles/index.scss';
+import { black, borderGray, navajoWhite } from '../lib/color';
+import { rgba } from '../lib/utils/rgba';
+
+export const pageQuery = graphql`
+  query IndexQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`;
+
+const indexList = [...Array(11)].map((_, i) => 11 - i);
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -17,15 +32,15 @@ type Props = {
   };
 };
 
-const IndexPage: FC<Props> = ({ location, data }) => {
+const IndexPage: FC<Props> = ({ location }) => {
   return (
     <Layout location={location}>
-      <div className="top">
-        <div className="top__profile">
+      <div css={topStyle}>
+        <div css={topProfileStyle} className="top__profile">
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="top__image" />
+          <div css={topImageStyle} />
 
-          <div className="top__info">
+          <div css={topInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
               <br />
@@ -37,23 +52,22 @@ const IndexPage: FC<Props> = ({ location, data }) => {
             </span>
           </div>
 
-          <div className="top__starring">
-            <h2 className="top__starringTitle">Starring</h2>
-            <div className="top__bioContainer">
-              <div className="top__bioWrapper">
-                <div className="top__bioImage" />
-                <div className="top__bioName">くろけん</div>
+          <div css={topStarringStyle}>
+            <h2 css={topStarringTitleStyle}>Starring</h2>
+            <div css={topBioContainerStyle}>
+              <div css={topBioWrapperStyle}>
+                <div css={topBioImageStyle} />
+                <div css={topBioNameStyle}>くろけん</div>
               </div>
-
-              <div className="top__bioWrapper">
-                <div className="top__bioImage" />
-                <div className="top__bioName">こうすけ</div>
+              <div css={topBioWrapperStyle}>
+                <div css={topBioImageStyle} />
+                <div css={topBioNameStyle}>こうすけ</div>
               </div>
             </div>
           </div>
 
           <Link to="/about/">
-            <h2 className="top__aboutLink">
+            <h2 css={topAboutLinkStyle}>
               About Us
               {/* TODO: font-awesome のパッケージをインストールする */}
               <i className="fas fa-arrow-right" />
@@ -61,45 +75,129 @@ const IndexPage: FC<Props> = ({ location, data }) => {
           </Link>
         </div>
 
-        <div className="top__episodesContainer">
-          {(() => {
-            const index = [...Array(11)].map((_, i) => 11 - i);
-            let episodes: Array<JSX.Element> = [];
-            episodes = index.map((i) => {
-              return (
-                <div className="top__episode">
-                  {/* TODO: <Link to={'/episode/' + i}> に直す */}
-                  <Link to="/episode/">
-                    <div className="top__episodeData">2020/XX/XX</div>
+        <div css={topEpisodesContainerStyle}>
+          {indexList.map((i) => (
+            <div css={topEpisodeStyle} key={i}>
+              {/* TODO: <Link to={'/episode/' + i}> に直す */}
+              <Link to="/episode/">
+                <div css={topEpisodeDataStyle}>2020/XX/XX</div>
 
-                    <h2 className="top__episodeTitle">#{i}: 新社会人の春</h2>
+                <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
 
-                    <div className="top__episodeExplain">
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
-                      {/*
-                       */}
-                      ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
-                    </div>
-                  </Link>
+                <div css={topEpisodeExplainStyle}>
+                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
+                  {/*
+                   */}
+                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
                 </div>
-              );
-            });
-            return <ul>{episodes}</ul>;
-          })()}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
   );
 };
 
-export const pageQuery = graphql`
-  query IndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+const topStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 100px 0;
+`;
+
+const topProfileStyle = css`
+  flex-basis: 25%;
+  margin-right: 36px;
+`;
+
+const topImageStyle = css`
+  width: 100%;
+  background-color: ${navajoWhite};
+  display: block;
+
+  &:before {
+    padding-top: 100%;
+    display: block;
+    background-color: ${navajoWhite};
+    content: '';
   }
+`;
+
+const topInfoStyle = css`
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 1.25rem;
+`;
+
+const topStarringStyle = css`
+  margin-top: 20px;
+`;
+
+const topStarringTitleStyle = css`
+  font-size: 2.5rem;
+  border-bottom: 1px solid ${borderGray};
+  text-align: center;
+`;
+
+const topBioContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const topBioWrapperStyle = css`
+  margin: auto;
+  text-align: center;
+`;
+
+const topBioImageStyle = css`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: ${navajoWhite};
+`;
+
+const topBioNameStyle = css`
+  margin-top: 20px;
+  font-size: 1.5rem;
+`;
+
+const topAboutLinkStyle = css`
+  display: block;
+  color: ${rgba(black, 0.8)};
+  text-align: center;
+  margin-top: 28px;
+  font-size: 2.5rem;
+`;
+
+const topEpisodesContainerStyle = css`
+  flex-basis: 75%;
+`;
+
+const topEpisodeStyle = css`
+  padding: 16px 0;
+
+  & + & {
+    border-top: 1px solid ${borderGray};
+  }
+`;
+
+const topEpisodeDataStyle = css`
+  font-size: 1.25rem;
+  font-weight: bold;
+`;
+
+const topEpisodeTitleStyle = css`
+  font-size: 2.5rem;
+  margin-top: 16px;
+`;
+
+const topEpisodeExplainStyle = css`
+  font-size: 1.25rem;
+  margin-top: 16px;
 `;
 
 export default IndexPage;

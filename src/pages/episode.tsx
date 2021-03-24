@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+/** @jsx jsx */
+import { FC } from 'react';
 import Link from 'gatsby-link';
+import { css, jsx } from '@emotion/core';
 import Layout from '../components/Layout';
-import '../styles/episode.scss';
+import { black, borderGray, navajoWhite } from '../lib/color';
+import { rgba } from '../lib/utils/rgba';
 
 type Props = {
   location: Location;
@@ -10,12 +13,12 @@ type Props = {
 const EpisodePage: FC<Props> = ({ location }) => {
   return (
     <Layout location={location}>
-      <div className="episode">
-        <div className="episode__profile">
+      <div css={episodeStyle}>
+        <div css={episodeProfileStyle}>
           {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div className="episode__image" />
+          <div css={episodeImageStyle} />
 
-          <div className="episode__info">
+          <div css={episodeInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
               <br />
@@ -27,23 +30,22 @@ const EpisodePage: FC<Props> = ({ location }) => {
             </span>
           </div>
 
-          <div className="episode__starring">
-            <h2 className="episode__starringTitle">Starring</h2>
-            <div className="episode__bioContainer">
-              <div className="episode__bioWrapper">
-                <div className="episode__bioImage" />
-                <div className="episode__bioName">くろけん</div>
+          <div css={episodeStarringStyle}>
+            <h2 css={episodeStarringTitleStyle}>Starring</h2>
+            <div css={episodeBioContainerStyle}>
+              <div css={episodeBioWrapperStyle}>
+                <div css={episodeBioImageStyle} />
+                <div css={episodeBioNameStyle}>くろけん</div>
               </div>
-
-              <div className="episode__bioWrapper">
-                <div className="episode__bioImage" />
-                <div className="episode__bioName">こうすけ</div>
+              <div css={episodeBioWrapperStyle}>
+                <div css={episodeBioImageStyle} />
+                <div css={episodeBioNameStyle}>こうすけ</div>
               </div>
             </div>
           </div>
 
           <Link to="/about/">
-            <h2 className="episode__aboutLink">
+            <h2 css={episodeaboutLinkStyle}>
               About Us
               {/* TODO: font-awesome のパッケージをインストールする */}
               <i className="fas fa-arrow-right" />
@@ -51,7 +53,7 @@ const EpisodePage: FC<Props> = ({ location }) => {
           </Link>
         </div>
 
-        <div className="episode__content">
+        <div css={episodeContentStyle}>
           {/* iframe 挿入 */}
           <iframe
             title="anchor player"
@@ -62,7 +64,7 @@ const EpisodePage: FC<Props> = ({ location }) => {
             scrolling="no"
           />
 
-          <div className="episode__contentDetail">
+          <div css={episodeContentDetailStyle}>
             <span>
               今回は新社会人になって二ヶ月になったこうすけに悩んでいることを聞いてみました。
               <br />
@@ -72,10 +74,10 @@ const EpisodePage: FC<Props> = ({ location }) => {
             </span>
           </div>
 
-          <div className="episode__shownotes">
-            <h2 className="episode__shownotesTitle">ShowNotes</h2>
+          <div css={episodeShownotesContentStyle}>
+            <h2 css={episodeShownotesTitleStyle}>ShowNotes</h2>
 
-            <ul className="episode__shownotesContent">
+            <ul css={episodeShownotesContentStyle}>
               <li>リモート入社式と新入社員のオンボーディグ</li>
               <li>リモート飲みとは？</li>
               <li>運動不足どう解消してる？</li>
@@ -88,5 +90,98 @@ const EpisodePage: FC<Props> = ({ location }) => {
     </Layout>
   );
 };
+
+const episodeStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 100px 0;
+`;
+
+const episodeProfileStyle = css`
+  flex-basis: 25%;
+  margin-right: 36px;
+`;
+
+const episodeImageStyle = css`
+  width: 100%;
+  background-color: ${navajoWhite};
+  display: block;
+
+  &:before {
+    padding-top: 100%;
+    display: block;
+    background-color: ${navajoWhite};
+    content: '';
+  }
+`;
+
+const episodeInfoStyle = css`
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  font-size: 1.25rem;
+`;
+
+const episodeStarringStyle = css`
+  margin-top: 20px;
+`;
+
+const episodeStarringTitleStyle = css`
+  font-size: 2.5rem;
+  border-bottom: 1px solid ${borderGray};
+  text-align: center;
+`;
+
+const episodeBioContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const episodeBioWrapperStyle = css`
+  margin: auto;
+  text-align: center;
+`;
+
+const episodeBioImageStyle = css`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: ${navajoWhite};
+`;
+
+const episodeBioNameStyle = css`
+  margin-top: 20px;
+  font-size: 1.5rem;
+`;
+
+const episodeaboutLinkStyle = css`
+  display: block;
+  color: ${rgba(black, 0.8)};
+  text-align: center;
+  margin-top: 28px;
+  font-size: 2.5rem;
+`;
+
+const episodeContentStyle = css`
+  text-align: left;
+`;
+
+const episodeContentDetailStyle = css`
+  font-size: 1.25rem;
+  margin-top: 32px;
+`;
+
+const episodeShownotesTitleStyle = css`
+  margin-top: 32px;
+  border-top: 1px solid ${borderGray};
+  padding-top: 32px;
+`;
+
+const episodeShownotesContentStyle = css`
+  font-size: 1.25rem;
+`;
 
 export default EpisodePage;
