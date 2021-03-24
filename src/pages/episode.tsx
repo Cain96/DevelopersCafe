@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { FC } from 'react';
 import Link from 'gatsby-link';
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
