@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Link from 'gatsby-link';
 import { css, jsx } from '@emotion/react';
 import { graphql } from 'gatsby';
-import Img, { FixedObject } from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite, pastelOrange } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
@@ -19,23 +19,17 @@ export const pageQuery = graphql`
     }
     squareLogo: file(relativePath: { eq: "square-logo.png" }) {
       childImageSharp {
-        fixed(width: 330, height: 330) {
-          ...GatsbyImageSharpFixed
-        }
+        gatsbyImageData(width: 330, height: 330, layout: FIXED)
       }
     }
     kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
       childImageSharp {
-        fixed(width: 100, height: 100) {
-          ...GatsbyImageSharpFixed
-        }
+        gatsbyImageData(width: 100, height: 100, layout: FIXED)
       }
     }
     kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
       childImageSharp {
-        fixed(width: 100, height: 100) {
-          ...GatsbyImageSharpFixed
-        }
+        gatsbyImageData(width: 100, height: 100, layout: FIXED)
       }
     }
   }
@@ -55,10 +49,10 @@ const IndexPage: FC<Props> = ({ location, data }) => {
     <Layout location={location}>
       <div css={topStyle}>
         <div css={topProfileStyle}>
-          <Img
+          <GatsbyImage
+            image={data.squareLogo?.childImageSharp?.gatsbyImageData}
             css={topImageStyle}
             alt="ロゴ画像"
-            fixed={data.squareLogo?.childImageSharp?.fixed as FixedObject}
           />
 
           <div css={topInfoStyle}>
@@ -82,10 +76,10 @@ const IndexPage: FC<Props> = ({ location, data }) => {
                 rel="noopener noreferrer"
                 css={topBioWrapperStyle}
               >
-                <Img
+                <GatsbyImage
+                  image={data.kurokenIcon?.childImageSharp?.gatsbyImageData}
                   css={topBioImageStyle}
                   alt="くろけんのアイコン画像"
-                  fixed={data.kurokenIcon?.childImageSharp?.fixed as FixedObject}
                 />
                 <div css={topBioNameStyle}>くろけん</div>
               </a>
@@ -95,10 +89,10 @@ const IndexPage: FC<Props> = ({ location, data }) => {
                 rel="noopener noreferrer "
                 css={topBioWrapperStyle}
               >
-                <Img
+                <GatsbyImage
+                  image={data.kosukeIcon?.childImageSharp?.gatsbyImageData}
                   css={topBioImageStyle}
                   alt="こうすけのアイコン画像"
-                  fixed={data.kosukeIcon?.childImageSharp?.fixed as FixedObject}
                 />
                 <div css={topBioNameStyle}>こうすけ</div>
               </a>
