@@ -1,0 +1,42 @@
+{
+  "extends": ["config:base"],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["after 10:30 before 18:00 every weekday"],
+  "labels": ["renovate"],
+  "baseBranches": ["master"],
+  "patch": { "automerge": true },
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "packagePatterns": ["^(@types/)?react(-dom|-test-renderer)?$"],
+      "groupName": "react"
+    },
+    {
+      "packagePatterns": ["^@emotion/", "^(babel-plugin|jest)-emotion$"],
+      "groupName": "emotion"
+    },
+    {
+      "packagePatterns": ["^@types/"],
+      "automerge": true,
+      "major": {
+        "automerge": false
+      },
+      "groupName": "types"
+    },
+    {
+      "extends": ["packages:linters"],
+      "packageNames": ["prettier"],
+      "packagePatterns": ["^@typescript-eslint/"],
+      "groupName": "linters"
+    },
+    {
+      "packageNames": [
+        "renovate"
+      ],
+      "automerge": true,
+      "major": {
+        "automerge": false
+      }
+    }
+  ]
+}
