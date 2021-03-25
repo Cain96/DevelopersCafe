@@ -130,6 +130,7 @@ const aboutImageStyle = css`
   width: 100%;
   background-color: ${navajoWhite};
   display: block;
+  margin: 0 auto;
 
   &:before {
     padding-top: 100%;

@@ -57,11 +57,12 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
     <Layout location={location}>
       <div css={episodeStyle}>
         <div css={episodeProfileStyle}>
-          <GatsbyImage
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            image={data.squareLogo!.childImageSharp!.gatsbyImageData}
+          <img
+            src={episode.itunes?.image}
+            alt={`${episode.title}のカバー画像`}
+            width="330"
+            height="330"
             css={episodeImageStyle}
-            alt="カバー画像"
           />
           <div css={episodeInfoStyle}>
             <span>
@@ -120,7 +121,8 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
             />
           )}
           <div css={episodeShownotesContentsStyle}>
-            <h2 css={episodeShownotesTitleStyle}>ShowNotes</h2>
+            <h2 css={episodeTitleStyle}>{episode.title}</h2>
+            <h3 css={episodeShownotesTitleStyle}>ShowNotes</h3>
             <div css={episodeShownotesContentsStyle}>{convertContent(episode.contentSnippet)}</div>
           </div>
         </div>
@@ -143,6 +145,7 @@ const episodeProfileStyle = css`
 
 const episodeImageStyle = css`
   width: 100%;
+  height: auto;
   background-color: ${navajoWhite};
   display: block;
 
@@ -207,10 +210,14 @@ const episodeContentStyle = css`
   text-align: left;
 `;
 
-const episodeShownotesTitleStyle = css`
+const episodeTitleStyle = css`
   margin-top: 32px;
   border-top: 1px solid ${borderGray};
   padding-top: 32px;
+`;
+
+const episodeShownotesTitleStyle = css`
+  padding-top: 12px;
 `;
 
 const episodeShownotesContentsStyle = css`
