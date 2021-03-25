@@ -2,22 +2,67 @@
 import { FC } from 'react';
 import Link from 'gatsby-link';
 import { css, jsx } from '@emotion/react';
-import Layout from '../components/Layout';
-import { black, borderGray, navajoWhite } from '../lib/color';
-import { rgba } from '../lib/utils/rgba';
+import { graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import Layout from '../../components/Layout';
+import { black, borderGray, navajoWhite } from '../../lib/color';
+import { rgba } from '../../lib/utils/rgba';
+import { convertEmbedUrl } from '../../lib/utils/url';
+import { convertContent } from '../../lib/episode/content';
+
+export const pageQuery = graphql`
+  query EpisodePage($id: String) {
+    squareLogo: file(relativePath: { eq: "square-logo.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 330, height: 330, layout: FIXED)
+      }
+    }
+    kosukeIcon: file(relativePath: { eq: "icon-kosuke.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 100, height: 100, layout: FIXED)
+      }
+    }
+    kurokenIcon: file(relativePath: { eq: "icon-kuroken.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 100, height: 100, layout: FIXED)
+      }
+    }
+    allFeedAnchorPodCast(filter: { id: { eq: $id } }) {
+      edges {
+        node {
+          id
+          content
+          contentSnippet
+          link
+          pubDate
+          title
+          itunes {
+            image
+          }
+        }
+      }
+    }
+  }
+`;
 
 type Props = {
   location: Location;
+  data: GatsbyTypes.EpisodePageQuery;
 };
 
-const EpisodePage: FC<Props> = ({ location }) => {
+const EpisodePage: FC<Props> = ({ location, data }) => {
+  const episode = data.allFeedAnchorPodCast.edges[0].node;
+
   return (
     <Layout location={location}>
       <div css={episodeStyle}>
         <div css={episodeProfileStyle}>
-          {/* TODO: gatsby-image を用いて、 Image タグに置き換える */}
-          <div css={episodeImageStyle} />
-
+          <GatsbyImage
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            image={data.squareLogo!.childImageSharp!.gatsbyImageData}
+            css={episodeImageStyle}
+            alt="カバー画像"
+          />
           <div css={episodeInfoStyle}>
             <span>
               新卒ソフトウェアエンジニアが送る
@@ -34,11 +79,21 @@ const EpisodePage: FC<Props> = ({ location }) => {
             <h2 css={episodeStarringTitleStyle}>Starring</h2>
             <div css={episodeBioContainerStyle}>
               <div css={episodeBioWrapperStyle}>
-                <div css={episodeBioImageStyle} />
+                <GatsbyImage
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  image={data.kurokenIcon!.childImageSharp!.gatsbyImageData}
+                  css={episodeBioImageStyle}
+                  alt="くろけんのアイコン画像"
+                />
                 <div css={episodeBioNameStyle}>くろけん</div>
               </div>
               <div css={episodeBioWrapperStyle}>
-                <div css={episodeBioImageStyle} />
+                <GatsbyImage
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  image={data.kosukeIcon!.childImageSharp!.gatsbyImageData}
+                  css={episodeBioImageStyle}
+                  alt="こうすけのアイコン画像"
+                />
                 <div css={episodeBioNameStyle}>こうすけ</div>
               </div>
             </div>
@@ -54,36 +109,19 @@ const EpisodePage: FC<Props> = ({ location }) => {
         </div>
 
         <div css={episodeContentStyle}>
-          {/* iframe 挿入 */}
-          <iframe
-            title="anchor player"
-            src="https://anchor.fm/developers-cafe/embed/episodes/11-ectm8q/a-a1v8s28"
-            height="150px"
-            width="100%"
-            frameBorder="0"
-            scrolling="no"
-          />
-
-          <div css={episodeContentDetailStyle}>
-            <span>
-              今回は新社会人になって二ヶ月になったこうすけに悩んでいることを聞いてみました。
-              <br />
-              その後はコロナ渦における働き方についてトークしました。
-              <br />
-              あとはテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-            </span>
-          </div>
-
-          <div css={episodeShownotesContentStyle}>
+          {episode.link && (
+            <iframe
+              title="anchor player"
+              src={convertEmbedUrl(episode.link)}
+              height="100px"
+              width="100%"
+              frameBorder="0"
+              scrolling="no"
+            />
+          )}
+          <div css={episodeShownotesContentsStyle}>
             <h2 css={episodeShownotesTitleStyle}>ShowNotes</h2>
-
-            <ul css={episodeShownotesContentStyle}>
-              <li>リモート入社式と新入社員のオンボーディグ</li>
-              <li>リモート飲みとは？</li>
-              <li>運動不足どう解消してる？</li>
-              <li>Uber Eatsを使ってみた</li>
-              <li>maintainableなcssとは何なのだろうか</li>
-            </ul>
+            <div css={episodeShownotesContentsStyle}>{convertContent(episode.contentSnippet)}</div>
           </div>
         </div>
       </div>
@@ -169,19 +207,14 @@ const episodeContentStyle = css`
   text-align: left;
 `;
 
-const episodeContentDetailStyle = css`
-  font-size: 1.25rem;
-  margin-top: 32px;
-`;
-
 const episodeShownotesTitleStyle = css`
   margin-top: 32px;
   border-top: 1px solid ${borderGray};
   padding-top: 32px;
 `;
 
-const episodeShownotesContentStyle = css`
-  font-size: 1.25rem;
+const episodeShownotesContentsStyle = css`
+  font-size: 1rem;
 `;
 
 export default EpisodePage;

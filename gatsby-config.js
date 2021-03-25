@@ -6,6 +6,7 @@ module.exports = {
     ...config,
   },
   plugins: [
+    `gatsby-plugin-image`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,

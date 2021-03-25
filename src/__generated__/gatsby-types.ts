@@ -303,9 +303,19 @@ type SitePage = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
   readonly isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  readonly context: Maybe<SitePageContext>;
   readonly pluginCreator: Maybe<SitePlugin>;
   readonly pluginCreatorId: Maybe<Scalars['String']>;
   readonly componentPath: Maybe<Scalars['String']>;
+};
+
+type SitePageContext = {
+  readonly id: Maybe<Scalars['String']>;
+  readonly _xparams: Maybe<SitePageContext_xparams>;
+};
+
+type SitePageContext_xparams = {
+  readonly id: Maybe<Scalars['String']>;
 };
 
 type ImageFormat =
@@ -613,6 +623,7 @@ type FeedAnchorPodCast = Node & {
   readonly isoDate: Maybe<Scalars['Date']>;
   readonly itunes: Maybe<FeedAnchorPodCastItunes>;
   readonly dc: Maybe<FeedAnchorPodCastDc>;
+  readonly gatsbyPath: Maybe<Scalars['String']>;
 };
 
 
@@ -621,6 +632,11 @@ type FeedAnchorPodCast_isoDateArgs = {
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+};
+
+
+type FeedAnchorPodCast_gatsbyPathArgs = {
+  filePath: Maybe<Scalars['String']>;
 };
 
 type FeedAnchorPodCastEnclosure = {
@@ -901,6 +917,7 @@ type Query_sitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
   pluginCreatorId: Maybe<StringQueryOperatorInput>;
   componentPath: Maybe<StringQueryOperatorInput>;
@@ -980,6 +997,7 @@ type Query_feedAnchorPodCastArgs = {
   isoDate: Maybe<DateQueryOperatorInput>;
   itunes: Maybe<FeedAnchorPodCastItunesFilterInput>;
   dc: Maybe<FeedAnchorPodCastDcFilterInput>;
+  gatsbyPath: Maybe<StringQueryOperatorInput>;
 };
 
 
@@ -1912,6 +1930,15 @@ type SiteSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type SitePageContextFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly _xparams: Maybe<SitePageContext_xparamsFilterInput>;
+};
+
+type SitePageContext_xparamsFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+};
+
 type SitePluginFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -2123,6 +2150,8 @@ type SitePageFieldsEnum =
   | 'internal.owner'
   | 'internal.type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context.id'
+  | 'context._xparams.id'
   | 'pluginCreator.id'
   | 'pluginCreator.parent.id'
   | 'pluginCreator.parent.parent.id'
@@ -2239,6 +2268,7 @@ type SitePageFilterInput = {
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
   readonly isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  readonly context: Maybe<SitePageContextFilterInput>;
   readonly pluginCreator: Maybe<SitePluginFilterInput>;
   readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
   readonly componentPath: Maybe<StringQueryOperatorInput>;
@@ -2748,7 +2778,8 @@ type FeedAnchorPodCastFieldsEnum =
   | 'itunes.image'
   | 'itunes.episode'
   | 'itunes.season'
-  | 'dc.creator';
+  | 'dc.creator'
+  | 'gatsbyPath';
 
 type FeedAnchorPodCastGroupConnection = {
   readonly totalCount: Scalars['Int'];
@@ -2775,6 +2806,7 @@ type FeedAnchorPodCastFilterInput = {
   readonly isoDate: Maybe<DateQueryOperatorInput>;
   readonly itunes: Maybe<FeedAnchorPodCastItunesFilterInput>;
   readonly dc: Maybe<FeedAnchorPodCastDcFilterInput>;
+  readonly gatsbyPath: Maybe<StringQueryOperatorInput>;
 };
 
 type FeedAnchorPodCastSortInput = {
@@ -3118,6 +3150,16 @@ type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type IndexPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly squareLogo: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kosukeIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kurokenIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+
+type EpisodePageQueryVariables = Exact<{
+  id: Maybe<Scalars['String']>;
+}>;
+
+
+type EpisodePageQuery = { readonly squareLogo: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kosukeIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kurokenIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly allFeedAnchorPodCast: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<FeedAnchorPodCast, 'id' | 'content' | 'contentSnippet' | 'link' | 'pubDate' | 'title'>
+        & { readonly itunes: Maybe<Pick<FeedAnchorPodCastItunes, 'image'>> }
+      ) }> } };
 
 type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
