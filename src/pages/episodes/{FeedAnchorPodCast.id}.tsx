@@ -54,7 +54,7 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
   const episode = data.allFeedAnchorPodCast.edges[0].node;
 
   return (
-    <Layout location={location}>
+    <Layout location={location} title={episode.title}>
       <div css={episodeStyle}>
         <div css={episodeProfileStyle}>
           <img
