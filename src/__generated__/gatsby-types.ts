@@ -3149,7 +3149,10 @@ type AboutPageQuery = { readonly squareLogo: Maybe<{ readonly childImageSharp: M
 type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type IndexPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly squareLogo: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kosukeIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kurokenIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+type IndexPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly squareLogo: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kosukeIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly kurokenIcon: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly allFeedAnchorPodCast: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<FeedAnchorPodCast, 'id' | 'pubDate' | 'title'>
+        & { readonly itunes: Maybe<Pick<FeedAnchorPodCastItunes, 'image'>> }
+      ) }> } };
 
 type EpisodePageQueryVariables = Exact<{
   id: Maybe<Scalars['String']>;

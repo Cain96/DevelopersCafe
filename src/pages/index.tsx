@@ -4,10 +4,14 @@ import Link from 'gatsby-link';
 import { css, jsx } from '@emotion/react';
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite, pastelOrange } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
 import { kosuketwitterUrl, kurokenTwitterUrl } from '../lib/data/urls';
+
+dayjs.extend(utc);
 
 export const pageQuery = graphql`
   query IndexPage {
@@ -31,19 +35,29 @@ export const pageQuery = graphql`
         gatsbyImageData(width: 100, height: 100, layout: FIXED)
       }
     }
+    allFeedAnchorPodCast(sort: { fields: isoDate, order: DESC }) {
+      edges {
+        node {
+          id
+          pubDate
+          title
+          itunes {
+            image
+          }
+        }
+      }
+    }
   }
 `;
 
-const indexList = [...Array(11)].map((_, i) => 11 - i);
-
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
 type Props = {
   location: Location;
   data: GatsbyTypes.IndexPageQuery;
 };
 
 const IndexPage: FC<Props> = ({ location, data }) => {
+  const episodes = data.allFeedAnchorPodCast.edges.map((edge) => edge.node);
+
   return (
     <Layout location={location}>
       <div css={topStyle}>
@@ -111,19 +125,20 @@ const IndexPage: FC<Props> = ({ location, data }) => {
         </div>
 
         <div css={topEpisodesContainerStyle}>
-          {indexList.map((i) => (
-            <div css={topEpisodeStyle} key={i}>
-              {/* TODO: <Link to={'/episode/' + i}> に直す */}
-              <Link to="/episode/" css={topEpisodeLinkStyle}>
-                <div css={topEpisodeDataStyle}>2020/XX/XX</div>
-
-                <h2 css={topEpisodeTitleStyle}>#{i}: 新社会人の春</h2>
-
-                <div css={topEpisodeExplainStyle}>
-                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入ります
-                  {/*
-                   */}
-                  ここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキストが入りますここにこの回を説明するテキスト
+          {episodes.map((episode) => (
+            <div css={topEpisodeStyle} key={episode.id}>
+              <Link to={`/episodes/${episode.id}`} css={topEpisodeLinkStyle}>
+                <img
+                  src={episode.itunes?.image}
+                  alt={`${episode.title}のカバー画像`}
+                  width="80"
+                  height="80"
+                />
+                <div css={topEpisodeDataStyle}>
+                  <div css={topEpisodePubDateStyle}>
+                    {dayjs(episode.pubDate).utc().local().format('YYYY/MM/DD')}
+                  </div>
+                  <h2 css={topEpisodeTitleStyle}>{episode.title}</h2>
                 </div>
               </Link>
             </div>
@@ -150,6 +165,7 @@ const topImageStyle = css`
   width: 100%;
   background-color: ${navajoWhite};
   display: block;
+  margin: 0 auto;
 
   &:before {
     padding-top: 100%;
@@ -226,20 +242,21 @@ const topEpisodeStyle = css`
 
 const topEpisodeLinkStyle = css`
   text-decoration: none;
+  display: flex;
+  align-items: center;
 `;
 
 const topEpisodeDataStyle = css`
+  margin-left: 12px;
+`;
+
+const topEpisodePubDateStyle = css`
   font-size: 1rem;
   font-weight: bold;
 `;
 
 const topEpisodeTitleStyle = css`
   font-size: 1.25rem;
-  margin-top: 16px;
-`;
-
-const topEpisodeExplainStyle = css`
-  font-size: 1rem;
   margin-top: 16px;
 `;
 
