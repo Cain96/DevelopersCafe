@@ -7,7 +7,6 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite, pastelOrange } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
-import { IndexPageQuery } from '../../types/graphql-types';
 import { kosuketwitterUrl, kurokenTwitterUrl } from '../lib/data/urls';
 
 export const pageQuery = graphql`
@@ -41,7 +40,7 @@ const indexList = [...Array(11)].map((_, i) => 11 - i);
 // to generate all types from graphQL schema
 type Props = {
   location: Location;
-  data: IndexPageQuery;
+  data: GatsbyTypes.IndexPageQuery;
 };
 
 const IndexPage: FC<Props> = ({ location, data }) => {
@@ -50,7 +49,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
       <div css={topStyle}>
         <div css={topProfileStyle}>
           <GatsbyImage
-            image={data.squareLogo?.childImageSharp?.gatsbyImageData}
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            image={data.squareLogo!.childImageSharp!.gatsbyImageData}
             css={topImageStyle}
             alt="ロゴ画像"
           />
@@ -77,7 +77,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
                 css={topBioWrapperStyle}
               >
                 <GatsbyImage
-                  image={data.kurokenIcon?.childImageSharp?.gatsbyImageData}
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  image={data.kurokenIcon!.childImageSharp!.gatsbyImageData}
                   css={topBioImageStyle}
                   alt="くろけんのアイコン画像"
                 />
@@ -90,7 +91,8 @@ const IndexPage: FC<Props> = ({ location, data }) => {
                 css={topBioWrapperStyle}
               >
                 <GatsbyImage
-                  image={data.kosukeIcon?.childImageSharp?.gatsbyImageData}
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  image={data.kosukeIcon!.childImageSharp!.gatsbyImageData}
                   css={topBioImageStyle}
                   alt="こうすけのアイコン画像"
                 />

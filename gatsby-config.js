@@ -18,13 +18,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: 'gatsby-plugin-graphql-codegen',
-      options: {
-        fileName: `types/graphql-types.d.ts`,
-        codegenConfig: { maybeValue: 'T | undefined' },
-      },
-    },
+    `gatsby-plugin-typegen`,
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
