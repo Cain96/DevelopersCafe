@@ -93,17 +93,9 @@ const AboutPage: FC<Props> = ({ location, data }) => {
               <div css={aboutBioNameStyle}>こうすけ</div>
               <div css={aboutBioTextStyle}>
                 <span>
-                  自己紹介ですエンジニアです
+                  フロントエンドエンジニア
                   <br />
-                  自己紹介ですエンジニアですです
-                  <br />
-                  自己紹介ですエンジニアですですです
-                  <br />
-                  自己紹介ですエンジニアです
-                  <br />
-                  自己紹介ですエンジニアですです
-                  <br />
-                  自己紹介ですエンジニアですですです
+                  サウナや筋トレが好き
                 </span>
               </div>
             </div>
