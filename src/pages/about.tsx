@@ -7,6 +7,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 import { black, borderGray, navajoWhite } from '../lib/color';
 import { rgba } from '../lib/utils/rgba';
+import { kosuketwitterUrl, kurokenTwitterUrl } from '../lib/data/urls';
 
 export const pageQuery = graphql`
   query AboutPage {
@@ -65,7 +66,12 @@ const AboutPage: FC<Props> = ({ location, data }) => {
         <div css={aboutStarringStyle}>
           <h2 css={aboutStarringTitleStyle}>Starring</h2>
           <div css={aboutBioContainerStyle}>
-            <div css={aboutBioWrapperStyle}>
+            <a
+              css={aboutBioWrapperStyle}
+              href={kurokenTwitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <GatsbyImage
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 image={data.kurokenIcon!.childImageSharp!.gatsbyImageData}
@@ -82,31 +88,29 @@ const AboutPage: FC<Props> = ({ location, data }) => {
                   デザイン領域に興味があり、デザインとエンジニアリングの行き来をするようなサービス開発をするにはどうしたらよいか日々考えています。
                 </span>
               </div>
-            </div>
+            </a>
 
-            <div css={aboutBioWrapperStyle}>
+            <a
+              css={aboutBioWrapperStyle}
+              href={kosuketwitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <GatsbyImage
-                image={data.kosukeIcon?.childImageSharp?.gatsbyImageData}
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                image={data.kosukeIcon!.childImageSharp!.gatsbyImageData}
                 css={aboutBioImageStyle}
                 alt="こうすけのアイコン画像"
               />
               <div css={aboutBioNameStyle}>こうすけ</div>
               <div css={aboutBioTextStyle}>
                 <span>
-                  自己紹介ですエンジニアです
+                  フロントエンドエンジニア
                   <br />
-                  自己紹介ですエンジニアですです
-                  <br />
-                  自己紹介ですエンジニアですですです
-                  <br />
-                  自己紹介ですエンジニアです
-                  <br />
-                  自己紹介ですエンジニアですです
-                  <br />
-                  自己紹介ですエンジニアですですです
+                  サウナや筋トレが好き
                 </span>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -164,6 +168,7 @@ const aboutBioContainerStyle = css`
 const aboutBioWrapperStyle = css`
   text-align: center;
   flex: 1 0;
+  text-decoration: none;
 
   & + & {
     margin-top: 20px;

@@ -9,6 +9,7 @@ import { black, borderGray, navajoWhite } from '../../lib/color';
 import { rgba } from '../../lib/utils/rgba';
 import { convertEmbedUrl } from '../../lib/utils/url';
 import { convertContent } from '../../lib/episode/content';
+import { kosuketwitterUrl, kurokenTwitterUrl } from '../../lib/data/urls';
 
 export const pageQuery = graphql`
   query EpisodePage($id: String) {
@@ -79,7 +80,12 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
           <div css={episodeStarringStyle}>
             <h2 css={episodeStarringTitleStyle}>Starring</h2>
             <div css={episodeBioContainerStyle}>
-              <div css={episodeBioWrapperStyle}>
+              <a
+                css={episodeBioWrapperStyle}
+                href={kurokenTwitterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GatsbyImage
                   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                   image={data.kurokenIcon!.childImageSharp!.gatsbyImageData}
@@ -87,8 +93,13 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
                   alt="くろけんのアイコン画像"
                 />
                 <div css={episodeBioNameStyle}>くろけん</div>
-              </div>
-              <div css={episodeBioWrapperStyle}>
+              </a>
+              <a
+                css={episodeBioWrapperStyle}
+                href={kosuketwitterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GatsbyImage
                   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                   image={data.kosukeIcon!.childImageSharp!.gatsbyImageData}
@@ -96,7 +107,7 @@ const EpisodePage: FC<Props> = ({ location, data }) => {
                   alt="こうすけのアイコン画像"
                 />
                 <div css={episodeBioNameStyle}>こうすけ</div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -184,6 +195,7 @@ const episodeBioContainerStyle = css`
 const episodeBioWrapperStyle = css`
   margin: auto;
   text-align: center;
+  text-decoration: none;
 `;
 
 const episodeBioImageStyle = css`
