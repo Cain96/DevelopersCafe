@@ -19,7 +19,7 @@
     "@reach/router": "1.3.4",
     "core-js": "3.13.1",
     "dayjs": "1.10.5",
-    "gatsby": "3.6.1",
+    "gatsby": "3.6.2",
     "gatsby-link": "3.6.0",
     "gatsby-plugin-emotion": "6.6.0",
     "gatsby-plugin-image": "1.6.0",
