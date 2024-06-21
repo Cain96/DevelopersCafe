@@ -34,7 +34,7 @@
     "gatsby-source-filesystem": "3.7.1",
     "gatsby-source-rss-feed": "1.2.2",
     "gatsby-transformer-sharp": "3.7.1",
-    "graphql": "15.8.0",
+    "graphql": "16.9.0",
     "hex-rgb": "5.0.0",
     "normalize.css": "8.0.1",
     "purgecss": "4.0.3",
